@@ -53,6 +53,8 @@ namespace Microsoft.BotBuilderSamples
                 app.UseDeveloperExceptionPage();
             }
 
+            /**
+
             services.AddAuthentication(options =>
             {
                 options.DefaultScheme = Microsoft.Bot.Connector.Authentication.BotFrameworkAuthenticationDefaultNames.BotAuthentication;
@@ -65,6 +67,8 @@ namespace Microsoft.BotBuilderSamples
                 options.Scope.Add("repo");
                 options.Scope.Add("user");
             });
+
+            **/
 
 
             app.UseDefaultFiles()
