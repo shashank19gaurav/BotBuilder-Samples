@@ -41,6 +41,8 @@ namespace Microsoft.BotBuilderSamples
 
             // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
             services.AddTransient<IBot, AuthBot<MainDialog>>();
+
+            services.AddAuthentication();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,6 +52,20 @@ namespace Microsoft.BotBuilderSamples
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = Microsoft.Bot.Connector.Authentication.BotFrameworkAuthenticationDefaultNames.BotAuthentication;
+            })
+            .AddOAuth("GitHubOAuth", options =>
+            {
+                options.ClientId = Configuration["GitHubClientId"];
+                options.ClientSecret = Configuration["GitHubClientSecret"];
+                options.CallbackPath = new Microsoft.AspNetCore.Http.PathString(Configuration["GitHubOAuthCallbackPath"]);
+                options.Scope.Add("repo");
+                options.Scope.Add("user");
+            });
+
 
             app.UseDefaultFiles()
                 .UseStaticFiles()
