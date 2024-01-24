@@ -43,6 +43,7 @@ namespace Microsoft.BotBuilderSamples
 
             var code = Request.Query["code"].ToString();
 
+
             // await _adapter.ProcessAsync(Request, Response, _bot);
 
             // Use HttpClient or another HTTP client library to make the POST request
